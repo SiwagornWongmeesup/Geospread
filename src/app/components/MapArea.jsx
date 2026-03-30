@@ -147,7 +147,7 @@ export default function MapArea({
                                     </div>
                                 </div>
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent"></div>
+                            <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-900/40 to-transparent"></div>
                             <button onClick={() => setSelectedIncident(null)} className="absolute top-3 right-3 p-1.5 bg-black/50 rounded-full text-white z-10 hover:bg-red-600 transition-colors"><X size={18}/></button>
                         </div>
                     </div>
@@ -187,11 +187,16 @@ export default function MapArea({
                         )}
                     </div>
 
-                    {/* 2. Metadata: ชื่อผู้แจ้งและเวลา (โชว์เฉพาะ Report เพื่อความน่าเชื่อถือ) */}
-                    {(selectedIncident.userName || selectedIncident.createdAt) && (
-                    <div className="flex justify-between text-[10px] text-zinc-500 mb-3 italic">
+                <p className="text-xs text-gray-400 mb-3 leading-relaxed line-clamp-3">
+                    {selectedIncident.description}
+                </p>
+
+                 {/*  Metadata: ชื่อผู้แจ้งและเวลา (โชว์เฉพาะ Report เพื่อความน่าเชื่อถือ) */}
+                    {(selectedIncident.reporterID?.name || selectedIncident.createdAt) && (
+                    <div className="flex justify-between text-[12px] text-zinc-500 mb-3 italic">
                         {/* เช็คว่ามีชื่อไหม ถ้าไม่มีให้ขึ้นว่า "ไม่ระบุชื่อ" */}
-                        <span>👤 {selectedIncident.type === 'sos' ? 'ผู้ร้องขอ:' : 'โดย:'} {selectedIncident.userName || 'ไม่ระบุชื่อ'}</span>
+                        <span>👤 {selectedIncident.type === 'sos' ? 'ผู้ร้องขอ:' : 'โดย:'} {selectedIncident.reporterID?.name || 'ไม่ระบุชื่อ'}</span>
+                       {console.log("เช็คชื่อใน JSX:", selectedIncident.reporterID?.name)}
                         
                         {/* เช็คว่ามีเวลาไหม */}
                         <span>🕒 {selectedIncident.createdAt 
@@ -201,19 +206,15 @@ export default function MapArea({
                     </div>
                 )}
 
-                <p className="text-xs text-gray-400 mb-6 leading-relaxed line-clamp-3">
-                    {selectedIncident.description}
-                </p>
-
                 {/* 3. ส่วนสถิติเฉพาะ Report: คะแนนความน่าเชื่อถือ และ รัศมี */}
                 {selectedIncident.type === 'report' && (
                     <div className="grid grid-cols-2 gap-3 mb-6">
                         <div className="bg-zinc-800/50 p-3 rounded-2xl border border-white/5 shadow-inner text-center">
-                            <p className="text-[9px] text-zinc-500 uppercase font-black mb-1">Reliability</p>
-                            <div className="text-yellow-500 text-sm font-bold">⭐️ 4.5</div>
+                            <p className="text-[9px] text-zinc-500 uppercase font-black mb-1">จำนวนคนกดถูกใจ</p>
+                            <div className="text-yellow-500 text-sm font-bold">👍 4.5</div>
                         </div>
                         <div className="bg-zinc-800/50 p-3 rounded-2xl border border-white/5 shadow-inner text-center">
-                            <p className="text-[9px] text-zinc-500 uppercase font-black mb-1">Impact Area</p>
+                            <p className="text-[9px] text-zinc-500 uppercase font-black mb-1">พื้นที่ผลกระทบ</p>
                             <p className="text-blue-400 text-xs font-bold">
                                 {selectedIncident.impact === 'wide' ? 'วงกว้าง' : selectedIncident.impact === 'area' ? 'ปานกลาง' : 'เฉพาะจุด'}
                             </p>

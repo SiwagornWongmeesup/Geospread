@@ -86,7 +86,13 @@ export default function GeospreadMap() {
                 credentials: 'include'
             });
             if (response.ok) { 
+                const result = await response.json();
                 alert("✅ เสนอตัวช่วยเหลือสำเร็จ!"); 
+
+                setIncidents(prev => prev.map(inc => 
+                    inc._id === incidentId ? result.data : inc
+                ));
+
                 setSelectedIncident(null); 
             }
         } catch (error) { console.error(error); }
@@ -173,20 +179,22 @@ export default function GeospreadMap() {
                         </span>
                     </div>
 
-                    {/* 2. Metadata: ชื่อผู้แจ้ง และ เวลา (สำคัญมากสำหรับมือถือ) */}
-                    {(selectedIncident.userName || selectedIncident.createdAt) && (
-                        <div className="flex justify-between text-[10px] text-zinc-500 mb-3 italic">
-                            <span>👤 {selectedIncident.type === 'sos' ? 'ผู้ร้องขอ:' : 'โดย:'} {selectedIncident.userName || 'ไม่ระบุชื่อ'}</span>
+                   
+
+                    {/* 2. คำอธิบาย: จำกัดบรรทัดเพื่อไม่ให้ดันปุ่มตกจอ */}
+                    <p className="text-xs text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
+                        {selectedIncident.description}
+                    </p>
+
+                     {/* 3. Metadata: ชื่อผู้แจ้ง และ เวลา (สำคัญมากสำหรับมือถือ) */}
+                    {(selectedIncident.reporterID?.name || selectedIncident.createdAt) && (
+                        <div className="flex justify-between text-[12px] text-zinc-500 mb-3 italic">
+                            <span>👤 {selectedIncident.type === 'sos' ? 'ผู้ร้องขอ:' : 'โดย:'} {selectedIncident.reporterID?.name || 'ไม่ระบุชื่อ'}</span>
                             <span>🕒 {selectedIncident.createdAt 
                                 ? new Date(selectedIncident.createdAt).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.'
                                 : '--:--'}</span>
                         </div>
                     )}
-
-                    {/* 3. คำอธิบาย: จำกัดบรรทัดเพื่อไม่ให้ดันปุ่มตกจอ */}
-                    <p className="text-xs text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
-                        {selectedIncident.description}
-                    </p>
 
                     {/* 4. สถิติเฉพาะ Report (โชว์แบบแถวเดียวประหยัดพื้นที่) */}
                     {selectedIncident.type === 'report' && (
