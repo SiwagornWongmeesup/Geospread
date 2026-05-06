@@ -199,10 +199,17 @@ export default function MapArea({
                        {console.log("เช็คชื่อใน JSX:", selectedIncident.reporterID?.name)}
                         
                         {/* เช็คว่ามีเวลาไหม */}
-                        <span>🕒 {selectedIncident.createdAt 
-                            ? new Date(selectedIncident.createdAt).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.'
-                            : 'ไม่ระบุเวลา'}
-                        </span>
+                        <span>
+                            🕒 {selectedIncident.createdAt
+                                ? new Date(selectedIncident.createdAt).toLocaleString('th-TH', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                }) + ' น.'
+                                : '--'}
+                            </span>
                     </div>
                 )}
 
@@ -230,7 +237,7 @@ export default function MapArea({
                             onClick={() => handleOfferHelp(selectedIncident._id)} 
                             className="flex-1 py-4 bg-red-600 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-red-500 transition-all shadow-lg shadow-red-900/40 active:scale-95 text-white"
                         >
-                            รับเคสช่วยเหลือ
+                            เสนอตัวช่วยเหลือ
                         </button>
                     ) : (
                     <>

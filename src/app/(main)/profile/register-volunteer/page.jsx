@@ -10,20 +10,8 @@ export default function RegisterVolunteer() {
     fullName: '',
     phone: '',
     address: '',
-    skills: [],
     experience: ''
   });
-
-  const skillsList = ["ปฐมพยาบาล", "กู้ภัยทางน้ำ", "ดับเพลิง", "ช่างยนต์", "โดรนค้นหา"];
-
-  const toggleSkill = (skill) => {
-    setFormData(prev => ({
-      ...prev,
-      skills: prev.skills.includes(skill) 
-        ? prev.skills.filter(s => s !== skill) 
-        : [...prev.skills, skill]
-    }));
-  };
 
   return (
     <div className="min-h-screen bg-black text-zinc-100 font-sans pb-10">
@@ -80,23 +68,8 @@ export default function RegisterVolunteer() {
         {step === 2 && (
           <div className="animate-in fade-in slide-in-from-right duration-300">
             <h2 className="text-2xl font-black mb-2 italic">ความสามารถพิเศษ</h2>
-            <p className="text-xs text-zinc-500 mb-6 font-medium">เลือกทักษะที่บอสมี เพื่อให้เราส่งเคสได้ถูกต้อง</p>
             
-            <div className="flex flex-wrap gap-2 mb-6">
-              {skillsList.map((skill) => (
-                <button
-                  key={skill}
-                  onClick={() => toggleSkill(skill)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${
-                    formData.skills.includes(skill) 
-                    ? 'bg-red-600 border-red-500 text-white shadow-lg shadow-red-900/20' 
-                    : 'bg-zinc-900 border-zinc-800 text-zinc-500'
-                  }`}
-                >
-                  {skill}
-                </button>
-              ))}
-            </div>
+            
             
             <label className="text-[10px] font-black text-zinc-500 uppercase ml-2 mb-1 block">ประสบการณ์กู้ภัย (ถ้ามี)</label>
             <textarea 
@@ -145,7 +118,7 @@ export default function RegisterVolunteer() {
             onClick={() => step < 3 ? setStep(step + 1) : alert('ส่งข้อมูลสำเร็จ! รอการตรวจสอบ')}
             className="flex-[2] py-4 bg-red-600 rounded-2xl text-[11px] font-black uppercase tracking-widest shadow-lg shadow-red-900/40 active:scale-95 transition-all"
           >
-            {step === 3 ? 'Submit Application' : 'Next Step'}
+            {step === 3 ? 'Submit ' : 'Next Step'}
           </button>
         </div>
 

@@ -108,7 +108,7 @@ export default function ProfilePage() {
             
             <div className="relative z-10">
               <h3 className="text-lg font-black italic text-white uppercase tracking-tighter">Become a Hero</h3>
-              <p className="text-[11px] text-white/80 mb-4 max-w-[200px]">สมัครเป็นอาสาสมัครกู้ภัย เพื่อรับสิทธิ์เข้าช่วยเหลือและเพิ่ม Trust Score</p>
+              <p className="text-[12px] text-white/80 mb-4 max-w-50">สมัครเป็นอาสาสมัครกู้ภัย เพื่อรับสิทธิ์เข้าช่วยเหลือ</p>
               
               <Link href="/profile/register-volunteer">
                 <button className="bg-white text-red-600 px-5 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-xl hover:bg-zinc-100 transition-colors">
