@@ -79,7 +79,7 @@ export default function Navbar() {
                             </Link>
                             <Link href="/history" className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white">
                                 <History size={18} />
-                                <span>ประวัติแจ้งเหตุ</span>
+                               
                             </Link>
                             <div className="w-px h-6 bg-gray-800"></div>
                             

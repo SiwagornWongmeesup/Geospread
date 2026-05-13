@@ -53,7 +53,7 @@ export default function GeospreadMap() {
                 }, 0);
                 // 🚦 เช็ค Role
                 if (user.role === 'admin') {
-                   router.push('/admin-panel');
+                   router.push('/admin/dashboard');
                 }
             } catch (error) {
                 console.error("แกะกล่อง JSON ไม่สำเร็จ:", error);

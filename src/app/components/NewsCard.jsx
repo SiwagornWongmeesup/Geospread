@@ -8,10 +8,10 @@ export default function ReportCard({ setSelectedReport }) {
 
     const [userLocation, setUserLocation] = useState({
         lat: null,
-        lng: null
+        lng: null,
     });
 
-    // ================= GET LOCATION =================
+    // ================= GET USER LOCATION =================
     useEffect(() => {
         if (!navigator.geolocation) return;
 
@@ -19,7 +19,7 @@ export default function ReportCard({ setSelectedReport }) {
             (pos) => {
                 setUserLocation({
                     lat: pos.coords.latitude,
-                    lng: pos.coords.longitude
+                    lng: pos.coords.longitude,
                 });
             },
             (err) => console.error(err),
@@ -27,7 +27,7 @@ export default function ReportCard({ setSelectedReport }) {
         );
     }, []);
 
-    // ================= FETCH REPORT =================
+    // ================= FETCH REPORTS =================
     useEffect(() => {
         const fetchReports = async () => {
             if (!userLocation.lat || !userLocation.lng) return;
@@ -45,9 +45,8 @@ export default function ReportCard({ setSelectedReport }) {
                 if (data.success) {
                     setReports(data.data || []);
                 }
-
             } catch (err) {
-                console.error('Fetch report error:', err);
+                console.error('Failed to fetch reports:', err);
             } finally {
                 setLoading(false);
             }
@@ -59,21 +58,21 @@ export default function ReportCard({ setSelectedReport }) {
     return (
         <div className="space-y-3">
 
-            {/* LOADING */}
+            {/* LOADING STATE */}
             {loading && (
                 <p className="text-center text-gray-500 text-sm py-6">
-                    🔄 กำลังโหลดรายงานเหตุ...
+                    🔄 Loading reports...
                 </p>
             )}
 
-            {/* EMPTY */}
+            {/* EMPTY STATE */}
             {!loading && reports.length === 0 && (
                 <p className="text-center text-gray-500 text-sm py-6">
-                    ยังไม่มีรายงานเหตุการณ์
+                    No reports available
                 </p>
             )}
 
-            {/* LIST */}
+            {/* REPORT LIST */}
             {reports.map((report) => (
                 <div
                     key={report._id}
@@ -81,7 +80,7 @@ export default function ReportCard({ setSelectedReport }) {
                     className="bg-[#151515] border border-gray-800 rounded-xl p-3 cursor-pointer hover:border-yellow-500 transition-all"
                 >
 
-                    {/* TOP */}
+                    {/* HEADER */}
                     <div className="flex justify-between mb-1">
                         <span className="text-[10px] px-2 py-0.5 rounded bg-yellow-500/10 text-yellow-400">
                             REPORT
@@ -106,7 +105,7 @@ export default function ReportCard({ setSelectedReport }) {
 
                     {/* FOOTER */}
                     <div className="flex justify-between mt-2 text-[10px] text-gray-600">
-                        <span>📍 report</span>
+                        <span>📍 Report</span>
                         <span>
                             🕒 {new Date(report.createdAt).toLocaleString()}
                         </span>
