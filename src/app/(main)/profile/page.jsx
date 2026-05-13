@@ -13,30 +13,26 @@ import {
 
 export default function ProfilePage() {
 
-  // 📸 profile image state
   const [profileImage, setProfileImage] = useState(
     'https://api.dicebear.com/7.x/avataaars/svg?seed=Fiew'
   );
 
   const fileInputRef = useRef(null);
 
-  // 👤 mock user
   const user = {
     name: 'ศิวกร',
     role: 'Volunteer Elite',
-    trustScore: 850,
-    joinedDate: 'ธันวาคม 2025',
+    trustScore: 100, // 🔥 out of 100
+    joinedDate: 'December 2025',
     stats: {
       reports: 12,
       helped: 3,
-      impact: '85',
+      impact: 85,
     },
   };
 
-  // 📷 handle image upload
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-
     if (!file) return;
 
     const imageUrl = URL.createObjectURL(file);
@@ -49,12 +45,11 @@ export default function ProfilePage() {
       {/* HEADER */}
       <div className="relative h-32 bg-gradient-to-b from-red-900/40 to-black" />
 
-      {/* PROFILE CONTENT */}
       <div className="px-6 relative -top-14">
 
+        {/* PROFILE */}
         <div className="flex flex-col items-center">
 
-          {/* PROFILE IMAGE */}
           <div className="relative">
 
             <div className="w-28 h-28 rounded-3xl bg-zinc-800 border-4 border-black overflow-hidden shadow-2xl">
@@ -65,12 +60,10 @@ export default function ProfilePage() {
               />
             </div>
 
-            {/* VERIFIED ICON */}
             <div className="absolute -bottom-2 -right-2 bg-emerald-500 p-1.5 rounded-xl border-4 border-black">
               <ShieldCheck size={16} className="text-white" />
             </div>
 
-            {/* CHANGE IMAGE BUTTON */}
             <button
               onClick={() => fileInputRef.current.click()}
               className="absolute top-0 right-0 bg-zinc-900 border border-zinc-700 p-2 rounded-xl hover:bg-zinc-800 transition"
@@ -78,7 +71,6 @@ export default function ProfilePage() {
               <Camera size={14} />
             </button>
 
-            {/* HIDDEN INPUT */}
             <input
               type="file"
               accept="image/*"
@@ -88,12 +80,10 @@ export default function ProfilePage() {
             />
           </div>
 
-          {/* NAME */}
           <h1 className="mt-4 text-2xl font-black italic tracking-tight">
             {user.name}
           </h1>
 
-          {/* ROLE */}
           <div className="flex items-center gap-2 mt-1">
             <span className="text-[10px] font-bold bg-red-500/10 text-red-500 px-2 py-0.5 rounded border border-red-500/20 uppercase tracking-widest">
               {user.role}
@@ -116,7 +106,7 @@ export default function ProfilePage() {
               </p>
 
               <h2 className="text-3xl font-black text-emerald-500">
-                {user.trustScore}
+                {user.trustScore}/100
               </h2>
             </div>
 
@@ -126,17 +116,17 @@ export default function ProfilePage() {
               </p>
 
               <p className="text-sm font-bold text-zinc-300">
-                Top 5% in Area
+                Top Performer
               </p>
             </div>
 
           </div>
 
-          {/* BAR */}
+          {/* PROGRESS BAR */}
           <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full"
-              style={{ width: '85%' }}
+              style={{ width: `${user.trustScore}%` }}
             />
           </div>
 
@@ -152,14 +142,12 @@ export default function ProfilePage() {
               icon: <MapPin size={14} />,
               color: 'text-blue-400',
             },
-
             {
               label: 'Helped',
               value: user.stats.helped,
               icon: <Award size={14} />,
               color: 'text-red-400',
             },
-
             {
               label: 'Impact',
               value: user.stats.impact,
@@ -171,7 +159,6 @@ export default function ProfilePage() {
               key={i}
               className="bg-zinc-900/30 p-4 rounded-2xl border border-zinc-800/50 flex flex-col items-center justify-center"
             >
-
               <span className={`mb-1 ${stat.color}`}>
                 {stat.icon}
               </span>
@@ -183,47 +170,39 @@ export default function ProfilePage() {
               <span className="text-[9px] text-zinc-500 uppercase font-bold">
                 {stat.label}
               </span>
-
             </div>
           ))}
-
         </div>
 
         {/* MENU */}
         <div className="mt-8 space-y-2">
 
           <p className="px-2 text-[12px] font-black text-zinc-500 uppercase mb-3">
-            บันทึกทั่วไป
+            Activity Logs
           </p>
 
           {[
             {
-              title: 'ประวัติการแจ้งเหตุ',
+              title: 'Incident History',
               icon: <History size={20} />,
               count: '12',
             },
-
             {
-              title: 'เคสที่รับช่วยเหลือ',
+              title: 'Helped Cases',
               icon: <ShieldCheck size={20} />,
               count: '45',
             },
-
             {
-              title: 'เคสที่เสนอตัวช่วยเหลือ',
+              title: 'Volunteer Cases',
               icon: <Award size={20} />,
               count: '5',
             },
-
           ].map((item, i) => (
-
             <button
               key={i}
               className="w-full bg-zinc-900/40 p-4 rounded-2xl flex items-center justify-between border border-transparent hover:border-zinc-800 active:scale-[0.98] transition-all"
             >
-
               <div className="flex items-center gap-4">
-
                 <div className="p-2 bg-zinc-800 rounded-xl text-zinc-400">
                   {item.icon}
                 </div>
@@ -231,34 +210,23 @@ export default function ProfilePage() {
                 <span className="text-sm font-bold text-zinc-200">
                   {item.title}
                 </span>
-
               </div>
 
               <div className="flex items-center gap-2">
-
                 <span className="text-xs font-bold text-zinc-600">
                   {item.count}
                 </span>
-
-                <ChevronRight
-                  size={16}
-                  className="text-zinc-700"
-                />
-
+                <ChevronRight size={16} className="text-zinc-700" />
               </div>
-
             </button>
-
           ))}
-
         </div>
 
         {/* LOGOUT */}
         <button className="mt-10 w-full py-4 rounded-2xl border border-red-900/30 text-red-500 text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-red-500/5 transition">
 
           <LogOut size={16} />
-
-          Sign Out From GeoSpread
+          Sign Out
 
         </button>
 

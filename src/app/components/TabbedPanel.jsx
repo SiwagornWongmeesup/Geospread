@@ -55,7 +55,7 @@ export default function TabbedPanel({ setSelectedIncident, isLoggedIn }) {
 
             try {
                 const res = await fetch(
-                    `http://localhost:5000/api/incidents?latitude=${userLocation.lat}&longitude=${userLocation.lng}&radius=15000`,
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/incidents?latitude=${userLocation.lat}&longitude=${userLocation.lng}&radius=15000`,
                     { credentials: 'include' }
                 );
 

@@ -5,7 +5,6 @@ import {
   LayoutDashboard,
   MapPin,
   AlertTriangle,
-  ShieldAlert,
   Users,
   TrendingUp,
   LogOut,
@@ -26,33 +25,33 @@ export default function Sidebar() {
     }));
   };
 
-  // 🚀 MENU CONFIG (REAL APP STYLE)
+  // 🚀 MENU CONFIG
   const menuItems = [
     {
-      name: 'ภาพรวมระบบ',
+      name: 'System Overview',
       href: '/admin/dashboard',
       icon: LayoutDashboard,
     },
     {
-      name: 'แผนที่',
+      name: 'Map',
       href: '/admin/map',
       icon: MapPin,
     },
     {
-      name: 'จัดการเหตุการณ์',
+      name: 'Incident Management',
       icon: AlertTriangle,
       submenu: [
-        { name: 'คำขอช่วยเหลือ', href: '/admin/requests' },
-        { name: 'รายงานเหตุการณ์', href: '/admin/reports' },
+        { name: 'Emergency Requests', href: '/admin/requests' },
+        { name: 'Incident Reports', href: '/admin/reports' },
       ],
     },
     {
-      name: 'ผู้ใช้งาน',
-      href: '/admin/users',
+      name: 'Users',
+      href: '/admin/useroverall',
       icon: Users,
     },
     {
-      name: 'สถิติ',
+      name: 'Statistics',
       href: '/admin/stats',
       icon: TrendingUp,
     },
@@ -63,7 +62,7 @@ export default function Sidebar() {
   // 🚪 LOGOUT
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:5000/api/users/logout', {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/logout`, {
         method: 'POST',
         credentials: 'include',
       });
@@ -99,7 +98,7 @@ export default function Sidebar() {
         {menuItems.map((item) => {
           const Icon = item.icon;
 
-          // 🔹 HAS SUBMENU
+          // 🔹 SUBMENU
           if (item.submenu) {
             return (
               <div key={item.name}>

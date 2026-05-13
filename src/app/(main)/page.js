@@ -97,7 +97,7 @@ export default function GeospreadMap() {
 
             try {
                 const response = await fetch(
-                    `http://localhost:5000/api/incidents?latitude=${userLat}&longitude=${userLng}&radius=${searchRadius}`,
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/incidents?latitude=${userLat}&longitude=${userLng}&radius=${searchRadius}`,
                     { credentials: 'include' }
                 );
 
@@ -118,7 +118,7 @@ export default function GeospreadMap() {
     const handleOfferHelp = async (incidentId) => {
         try {
             const response = await fetch(
-                `http://localhost:5000/api/incidents/${incidentId}/offer`,
+                `${process.env.NEXT_PUBLIC_API_URL}/api/incidents/${incidentId}/offer`,
                 {
                     method: 'PUT',
                     credentials: 'include'

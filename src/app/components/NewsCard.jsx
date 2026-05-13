@@ -35,8 +35,8 @@ export default function ReportCard({ setSelectedReport }) {
             setLoading(true);
 
             try {
-                const res = await fetch(
-                    `http://localhost:5000/api/incidents?type=report&latitude=${userLocation.lat}&longitude=${userLocation.lng}&radius=15000`,
+                const res = await (
+                    `${process.env.NEXT_PUBLIC_API_URL}s/api/incidents?type=report&latitude=${userLocation.lat}&longitude=${userLocation.lng}&radius=15000`,
                     { credentials: 'include' }
                 );
 

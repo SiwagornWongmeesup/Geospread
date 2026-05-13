@@ -218,7 +218,7 @@ export default function MapArea({
                     <div className="grid grid-cols-2 gap-3 mb-6">
                         <div className="bg-zinc-800/50 p-3 rounded-2xl border border-white/5 shadow-inner text-center">
                             <p className="text-[9px] text-zinc-500 uppercase font-black mb-1">จำนวนคนกดถูกใจ</p>
-                            <div className="text-yellow-500 text-sm font-bold">👍 4.5</div>
+                            <div className="text-yellow-500 text-sm font-bold">👍 2</div>
                         </div>
                         <div className="bg-zinc-800/50 p-3 rounded-2xl border border-white/5 shadow-inner text-center">
                             <p className="text-[9px] text-zinc-500 uppercase font-black mb-1">พื้นที่ผลกระทบ</p>
@@ -247,7 +247,7 @@ export default function MapArea({
                 className="flex-1 py-4 bg-emerald-600/20 text-emerald-500 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-emerald-500/30 hover:bg-emerald-600 hover:text-white transition-all active:scale-95 flex items-center justify-center gap-2"
             >
                 <span className="text-sm">👍</span>
-                มีประโยชน์ ({selectedIncident.likes || 0})
+                มีประโยชน์ ({selectedIncident.likes || 2})
             </button>
 
             {/* 🔗 ปุ่มแชร์ (Share API) */}

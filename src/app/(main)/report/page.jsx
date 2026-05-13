@@ -136,7 +136,7 @@ export default function Report() {
                 data.append('photos', file);
             });
 
-            const res = await fetch('http://localhost:5000/api/incidents', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/incidents`, {
                 method: 'POST',
                 body: data,
                 credentials: 'include'

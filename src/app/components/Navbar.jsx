@@ -35,7 +35,7 @@ export default function Navbar() {
     const handleLogout = async () => {
         try {
             // เรียก API Logout ฝั่ง Backend เพื่อล้าง HttpOnly Cookie
-            await fetch('http://localhost:5000/api/users/logout', { 
+            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/logout`, { 
                 method: 'POST',
                 credentials: 'include' 
             });
@@ -99,8 +99,8 @@ export default function Navbar() {
                         </div>
                     ) : (
                         <div className="flex items-center gap-3">
-                            <Link href="/login" className="text-sm font-medium hover:text-red-500">เข้าสู่ระบบ</Link>
-                            <Link href="/register" className="px-4 py-2 text-sm font-bold bg-red-600 hover:bg-red-700 rounded-full shadow-lg">สมัครสมาชิก</Link>
+                            <Link href="/login" className="text-sm font-medium hover:text-red-500">Sign in</Link>
+                            <Link href="/register" className="px-4 py-2 text-sm font-bold bg-red-600 hover:bg-red-700 rounded-full shadow-lg">Register</Link>
                         </div>
                     )}
                 </div>
